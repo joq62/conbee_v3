@@ -1,0 +1,12 @@
+{"1":
+{"etag":"353037354a231365a1a03de40d976d64","hascolor":false,"lastannounced":null,"lastseen":"2022-04-12T20:45Z","manufacturername":"dresden elektronik",
+"modelid":"ConBee II","name":"Configuration tool 1","state":{"reachable":true},"swversion":"0x26660700",
+"type":"Configuration tool","uniqueid":"00:21:2e:ff:ff:06:a1:4c-01"},
+
+"7":{"etag":"c57b47faed9e9714d8d6ca99729984cf","hascolor":false,"lastannounced":null,"lastseen":"2022-05-29T19:38Z","manufacturername":"dresden elektronik",
+"modelid":"ConBee II","name":"Configuration tool 7","state":{"reachable":true},"swversion":"0x26580700",
+"type":"Configuration tool","uniqueid":"00:21:2e:ff:ff:08:23:1f-01"},
+
+"8":{"etag":"c584457171f60b41450834dbb52cdd79","hascolor":false,"lastannounced":"2022-05-29T19:25:25Z","lastseen":"2022-05-29T19:37Z","manufacturername":"LUMI",
+"modelid":"lumi.switch.n0agl1","name":"aqara_embedded1_switch","state":{"alert":"none","on":false,"reachable":true},"swversion":"Aug  8 2020",
+"type":"On/Off light","uniqueid":"04:cf:8c:df:3c:8b:2f:2d-01"}}

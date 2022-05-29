@@ -1,0 +1,10 @@
+-define(device_list,["tradfri_bulb_E14_ws_candleopal_470lm",
+		     "tradfri_bulb_e27_cws_806lmw",
+		     "tradfri_bulb_e27_ww_806lm",
+		     "tradfri_control_outlet",
+		     "tradfri_on_off_switch",
+		     "lumi_sensor_magnet_aq2",
+		     "lumi_sensor_motion_aq2",
+		     "lumi_weather",
+		     "lumi_switch_n0agl1"
+		    ]).

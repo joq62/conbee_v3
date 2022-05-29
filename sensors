@@ -1,0 +1,20 @@
+{"1":
+{"config":{"configured":true,"on":true,"sunriseoffset":30,"sunsetoffset":-30},"etag":"9f245d6d6a4007c345674d7cd98aa2cf","manufacturername":"Philips",
+"modelid":"PHDL00","name":"Daylight","state":{"dark":false,"daylight":false,"lastupdated":"2022-05-29T19:13:39.913","status":180,"sunrise":"2022-05-29T01:49:28","sunset":"2022-05-29T19:43:37"},"swversion":"1.0",
+"type":"Daylight","uniqueid":"00:21:2e:ff:ff:08:23:1f-01"},
+
+"10":{"config":{"battery":100,"offset":0,"on":true,"reachable":true},"ep":1,"etag":"6713e78e5e0f6ee26ae9db8b5d2d06e2","lastannounced":"2022-03-20T14:19:06Z","lastseen":"2022-05-29T19:29Z","manufacturername":"LUMI",
+"modelid":"lumi.weather","name":"aqara_temp1_sensor","state":{"lastupdated":"2022-05-29T19:29:01.974","pressure":1023},"swversion":"20191205",
+"type":"ZHAPressure","uniqueid":"00:15:8d:00:06:e3:cf:fe-01-0403"},
+
+"14":{"config":{"alert":"none","battery":100,"delay":180,"duration":60,"group":"3","on":true,"reachable":true},"ep":1,"etag":"1673d1940df81acf18a4c0f584814c7f","lastannounced":"2022-05-29T15:17:18Z","lastseen":"2022-05-29T19:28Z","manufacturername":"IKEA of Sweden",
+"modelid":"TRADFRI motion sensor","name":"TRÅDFRI Motion sensor","state":{"dark":true,"lastupdated":"2022-05-29T19:29:11.512","presence":false},
+"type":"ZHAPresence","uniqueid":"84:ba:20:ff:fe:9b:d6:4d-01-0006"},
+
+"8":{"config":{"battery":100,"offset":0,"on":true,"reachable":true},"ep":1,"etag":"69a3e1372f758d537b52487340dd84dd","lastannounced":"2022-03-20T14:19:06Z","lastseen":"2022-05-29T19:29Z","manufacturername":"LUMI",
+"modelid":"lumi.weather","name":"aqara_temp1_sensor","state":{"lastupdated":"2022-05-29T19:29:01.964","temperature":2484},"swversion":"20191205",
+"type":"ZHATemperature","uniqueid":"00:15:8d:00:06:e3:cf:fe-01-0402"},
+
+"9":{"config":{"battery":100,"offset":0,"on":true,"reachable":true},"ep":1,"etag":"8450f686e6394503be5590bdc0a198b9","lastannounced":"2022-03-20T14:19:06Z","lastseen":"2022-05-29T19:29Z","manufacturername":"LUMI",
+"modelid":"lumi.weather","name":"aqara_temp1_sensor","state":{"humidity":4067,"lastupdated":"2022-05-29T19:29:01.970"},"swversion":"20191205",
+"type":"ZHAHumidity","uniqueid":"00:15:8d:00:06:e3:cf:fe-01-0405"}}
