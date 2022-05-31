@@ -4,70 +4,49 @@
 %%% 
 %%% Created : 10 dec 2012
 %%% -------------------------------------------------------------------
--module(tradfri_on_off_switch).    
+-module(tradfri_motion_sensor).    
      
 %% --------------------------------------------------------------------
 %% Include files
 %% --------------------------------------------------------------------
--define(ModelId,"TRADFRI on/off switch").
+-define(ModelId,"TRADFRI motion sensor").
 -define(Type,"sensors").
 %% --------------------------------------------------------------------
-%   {"TRADFRI control outlet",
-%     "2",
-%         #{<<"alert">> => <<"none">>,
-%           <<"on">> => false,
-%           <<"reachable">> => false}},
-
+%% #{<<"dark">> => false,<<"daylight">> => false,
+%%            <<"lastupdated">> => <<"2022-03-21T22:17:20.339">>,
+%%           <<"lightlevel">> => 17994,<<"lux">> => 63}},
 
 
 
 %% External exports
 -export([
-	 is_on/1,
+	 is_presence/1,
 	 reachable/1
-	 
+
 	]). 
 
 
 %% ====================================================================
 %% External functions
 %% ====================================================================
-
-
 %% --------------------------------------------------------------------
 %% Function:start/0 
 %% Description: Initiate the eunit tests, set upp needed processes etc
 %% Returns: non
 %% --------------------------------------------------------------------
 
+is_presence(Name)->
+    {ok,List}=lib_conbee:device(?Type,Name),
+    [IsPresence]=[maps:get(<<"presence">>,StateMap)||{_Name,_NumId,_ModelId,StateMap,_ConfigMap}<-List,
+					   lists:member( <<"presence">>,maps:keys(StateMap))],
+    IsPresence.
 
-
-%% --------------------------------------------------------------------
-%% Function:start/0 
-%% Description: Initiate the eunit tests, set upp needed processes etc
-%% Returns: non
-%% --------------------------------------------------------------------
-is_on(Name)->
-    {ok,[{_Name,_NumId,_ModelId,StateMap,_ConfigMap}]}=lib_conbee:device(?Type,Name),
-    case maps:get(<<"buttonevent">>,StateMap) of
-	1001->
-	    true;
-	1002->
-	    true;
-	1003->
-	    true;
-	2001 ->
-	    false;
-	2002 ->
-	    false;
-	2003 ->
-	    false
-    end.
 %% --------------------------------------------------------------------
 %% Function:start/0 
 %% Description: Initiate the eunit tests, set upp needed processes etc
 %% Returns: non
 %% --------------------------------------------------------------------
 reachable(Name)->
-    {ok,[{_Name,_NumId,_ModelId,StateMap,_ConfigMap}]}=lib_conbee:device(?Type,Name),
-     maps:get(<<"reachable">>,StateMap).
+    not_implemented.
+%   {ok,[{_Name,_NumId,_ModelId,StateMap,_ConfigMap}]}=lib_conbee:device(?Type,Name),
+ %    maps:get(<<"reachable">>,StateMap).

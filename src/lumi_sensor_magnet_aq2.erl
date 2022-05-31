@@ -33,7 +33,7 @@
 
 is_open(Name)->
     {ok,List}=lib_conbee:device(?Type,Name),
-    [IsOpen]=[maps:get(<<"open">>,StateMap)||{_Name,_NumId,_ModelId,StateMap}<-List,
+    [IsOpen]=[maps:get(<<"open">>,StateMap)||{_Name,_NumId,_ModelId,StateMap,_ConfigMap}<-List,
 					   lists:member( <<"open">>,maps:keys(StateMap))],
     IsOpen.
 %% --------------------------------------------------------------------

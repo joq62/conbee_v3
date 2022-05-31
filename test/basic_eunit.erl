@@ -25,6 +25,9 @@
 start()->
     ok=application:start(conbee),
     pong=conbee_server:ping(),
+    ok=test_tradfri_motion(), 
+    ok=test_lumi_weather(),
+    ok=test_lumi_switch(),
     ok=test2(),
     ok=test1(),
 
@@ -36,10 +39,55 @@ start()->
 %% Description: Initiate the eunit tests, set upp needed processes etc
 %% Returns: non
 %% -------------------------------------------------------------------
+test_tradfri_motion()->
+    not_implemented=conbee_server:cmd_devices(tradfri_motion_sensor,reachable,["tradfri_motion_1_sensor"]),
+    Presence=conbee_server:cmd_devices(tradfri_motion_sensor,is_presence,["tradfri_motion_1_sensor"]),
+    io:format("tradfri_motion_1_sensor ~p~n",[Presence]),
+    
+    ok.
+
+%% --------------------------------------------------------------------
+%% Function:start/0 
+%% Description: Initiate the eunit tests, set upp needed processes etc
+%% Returns: non
+%% -------------------------------------------------------------------
+test_lumi_weather()->
+    not_implemented=conbee_server:cmd_devices(lumi_weather,reachable,["lumi_weather_1_sensor"]),
+    Temp=conbee_server:cmd_devices(lumi_weather,temp,["lumi_weather_1_sensor"]),
+    Humidity=conbee_server:cmd_devices(lumi_weather,humidity,["lumi_weather_1_sensor"]),
+    Pressure=conbee_server:cmd_devices(lumi_weather,pressure,["lumi_weather_1_sensor"]),
+    io:format("lumi_weather_1_sensor ~p~n",[{Temp,Humidity,Pressure}]),
+    
+    ok.
+    
+%% --------------------------------------------------------------------
+%% Function:start/0 
+%% Description: Initiate the eunit tests, set upp needed processes etc
+%% Returns: non
+%% -------------------------------------------------------------------
+test_lumi_switch()->
+    true=conbee_server:cmd_devices(lumi_switch_n0agl1,reachable,["lumi_1_switch"]),
+    conbee_server:cmd_devices(lumi_switch_n0agl1,set,["lumi_1_switch","off"]),
+    false=conbee_server:cmd_devices(lumi_switch_n0agl1,is_on,["lumi_1_switch"]),
+    conbee_server:cmd_devices(lumi_switch_n0agl1,set,["lumi_1_switch","on"]),
+    timer:sleep(1000),
+    true=conbee_server:cmd_devices(lumi_switch_n0agl1,is_on,["lumi_1_switch"]),
+    conbee_server:cmd_devices(lumi_switch_n0agl1,set,["lumi_1_switch","off"]),
+    false=conbee_server:cmd_devices(lumi_switch_n0agl1,is_on,["lumi_1_switch"]),
+    
+    
+    ok.
+    
+ 
+%% --------------------------------------------------------------------
+%% Function:start/0 
+%% Description: Initiate the eunit tests, set upp needed processes etc
+%% Returns: non
+%% -------------------------------------------------------------------
 test2()->
     true=conbee_server:cmd_devices(lumi_switch_n0agl1,reachable,["lumi_1_switch"]),
     not_implemented=conbee_server:cmd_devices(lumi_weather,reachable,["lumi_weather_1_sensor"]),
- %   true=conbee_server:cmd_devices(lumi_switch_n0agl1,reachable,["tradfri_motion_1_sensor"]),
+    not_implemented=conbee_server:cmd_devices(tradfri_motion_sensor,reachable,["tradfri_motion_1_sensor"]),
     
  
     

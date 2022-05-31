@@ -41,7 +41,7 @@
 
 lux(Name)->
     {ok,List}=lib_conbee:device(?Type,Name),
-    [Info]=[maps:get(<<"lux">>,StateMap)||{_Name,_NumId,_ModelId,StateMap}<-List,
+    [Info]=[maps:get(<<"lux">>,StateMap)||{_Name,_NumId,_ModelId,StateMap,_ConfigMap}<-List,
 					   lists:member( <<"lux">>,maps:keys(StateMap))],
     Info.
 
@@ -53,7 +53,7 @@ lux(Name)->
 
 lightlevel(Name)->
     {ok,List}=lib_conbee:device(?Type,Name),
-    [Info]=[maps:get(<<"lightlevel">>,StateMap)||{_Name,_NumId,_ModelId,StateMap}<-List,
+    [Info]=[maps:get(<<"lightlevel">>,StateMap)||{_Name,_NumId,_ModelId,StateMap,_ConfigMap}<-List,
 					   lists:member( <<"lightlevel">>,maps:keys(StateMap))],
     Info.
 %% --------------------------------------------------------------------
@@ -64,7 +64,7 @@ lightlevel(Name)->
 
 is_daylight(Name)->
     {ok,List}=lib_conbee:device(?Type,Name),
-    [Info]=[maps:get(<<"daylight">>,StateMap)||{_Name,_NumId,_ModelId,StateMap}<-List,
+    [Info]=[maps:get(<<"daylight">>,StateMap)||{_Name,_NumId,_ModelId,StateMap,_ConfigMap}<-List,
 					   lists:member( <<"daylight">>,maps:keys(StateMap))],
     Info.
 %% --------------------------------------------------------------------
@@ -75,7 +75,7 @@ is_daylight(Name)->
 
 is_dark(Name)->
     {ok,List}=lib_conbee:device(?Type,Name),
-    [Info]=[maps:get(<<"dark">>,StateMap)||{_Name,_NumId,_ModelId,StateMap}<-List,
+    [Info]=[maps:get(<<"dark">>,StateMap)||{_Name,_NumId,_ModelId,StateMap,_ConfigMap}<-List,
 					   lists:member( <<"dark">>,maps:keys(StateMap))],
     Info.
 
@@ -87,7 +87,7 @@ is_dark(Name)->
 
 is_presence(Name)->
     {ok,List}=lib_conbee:device(?Type,Name),
-    [IsPresence]=[maps:get(<<"presence">>,StateMap)||{_Name,_NumId,_ModelId,StateMap}<-List,
+    [IsPresence]=[maps:get(<<"presence">>,StateMap)||{_Name,_NumId,_ModelId,StateMap,_ConfigMap}<-List,
 					   lists:member( <<"presence">>,maps:keys(StateMap))],
     IsPresence.
 
