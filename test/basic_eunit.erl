@@ -25,6 +25,11 @@
 start()->
     ok=application:start(conbee),
     pong=conbee_server:ping(),
+
+    ok=test_lumi_sensor_motion_aq2(),
+    ok=test_tradfri_bulb_E14_ws_candleopal_470lm(),
+
+    ok=test_tradfri_control_outlet(),
     ok=test_tradfri_motion(), 
     ok=test_lumi_weather(),
     ok=test_lumi_switch(),
@@ -34,6 +39,57 @@ start()->
     init:stop(),
     ok.
 
+
+
+%% --------------------------------------------------------------------
+%% Function:start/0 
+%% Description: Initiate the eunit tests, set upp needed processes etc
+%% Returns: non
+%% -------------------------------------------------------------------
+test_lumi_sensor_motion_aq2()->
+    not_implemented=conbee_server:cmd_devices(lumi_sensor_motion_aq2,reachable,["aqara_1_motion_sensor"]),
+    Presence=conbee_server:cmd_devices(lumi_sensor_motion_aq2,is_presence,["aqara_1_motion_sensor"]),
+    Dark=conbee_server:cmd_devices(lumi_sensor_motion_aq2,is_dark,["aqara_1_motion_sensor"]),
+    DayLight=conbee_server:cmd_devices(lumi_sensor_motion_aq2,is_daylight,["aqara_1_motion_sensor"]),
+    LightLevel=conbee_server:cmd_devices(lumi_sensor_motion_aq2,lightlevel,["aqara_1_motion_sensor"]),
+    Lux=conbee_server:cmd_devices(lumi_sensor_motion_aq2,lux,["aqara_1_motion_sensor"]),
+    io:format("aqara_1_motion_sensor ~p~n",[{Presence,Dark,DayLight,LightLevel,Lux}]),
+    ok.
+
+%% --------------------------------------------------------------------
+%% Function:start/0 
+%% Description: Initiate the eunit tests, set upp needed processes etc
+%% Returns: non
+%% -------------------------------------------------------------------
+test_tradfri_bulb_E14_ws_candleopal_470lm()->
+    conbee_server:cmd_devices(lumi_switch_n0agl1,set,["lumi_1_switch","on"]),
+    timer:sleep(1000),
+    conbee_server:cmd_devices(tradfri_bulb_E14_ws_candleopal_470lm,set,["tradfri_lamp_2_lights","off"]),
+    timer:sleep(1000),
+    true=conbee_server:cmd_devices(tradfri_bulb_E14_ws_candleopal_470lm,reachable,["tradfri_lamp_2_lights"]),
+
+    conbee_server:cmd_devices(tradfri_bulb_E14_ws_candleopal_470lm, set_bri,["tradfri_lamp_2_lights",10]),
+    conbee_server:cmd_devices(tradfri_bulb_E14_ws_candleopal_470lm,set,["tradfri_lamp_2_lights","on"]),
+    
+
+    ok.
+
+%% --------------------------------------------------------------------
+%% Function:start/0 
+%% Description: Initiate the eunit tests, set upp needed processes etc
+%% Returns: non
+%% -------------------------------------------------------------------
+test_tradfri_control_outlet()->
+    true=conbee_server:cmd_devices(tradfri_control_outlet,reachable,["tradfri_outlet_2_switch"]),
+    conbee_server:cmd_devices(tradfri_control_outlet,set,["tradfri_outlet_2_switch","off"]),
+    timer:sleep(1000),
+    false=conbee_server:cmd_devices(tradfri_control_outlet,is_on,["tradfri_outlet_2_switch"]),
+    conbee_server:cmd_devices(tradfri_control_outlet,set,["tradfri_outlet_2_switch","on"]),
+    true=conbee_server:cmd_devices(tradfri_control_outlet,is_on,["tradfri_outlet_2_switch"]),
+    conbee_server:cmd_devices(tradfri_control_outlet,set,["tradfri_outlet_2_switch","off"]),
+    false=conbee_server:cmd_devices(tradfri_control_outlet,is_on,["tradfri_outlet_2_switch"]),
+    ok.
+    
 %% --------------------------------------------------------------------
 %% Function:start/0 
 %% Description: Initiate the eunit tests, set upp needed processes etc
@@ -70,12 +126,11 @@ test_lumi_switch()->
     conbee_server:cmd_devices(lumi_switch_n0agl1,set,["lumi_1_switch","off"]),
     false=conbee_server:cmd_devices(lumi_switch_n0agl1,is_on,["lumi_1_switch"]),
     conbee_server:cmd_devices(lumi_switch_n0agl1,set,["lumi_1_switch","on"]),
-    timer:sleep(1000),
+    timer:sleep(2000),
     true=conbee_server:cmd_devices(lumi_switch_n0agl1,is_on,["lumi_1_switch"]),
     conbee_server:cmd_devices(lumi_switch_n0agl1,set,["lumi_1_switch","off"]),
+    timer:sleep(2000),
     false=conbee_server:cmd_devices(lumi_switch_n0agl1,is_on,["lumi_1_switch"]),
-    
-    
     ok.
     
  

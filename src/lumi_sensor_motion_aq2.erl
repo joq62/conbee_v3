@@ -97,5 +97,6 @@ is_presence(Name)->
 %% Returns: non
 %% --------------------------------------------------------------------
 reachable(Name)->
-    {ok,[{_Name,_NumId,_ModelId,StateMap,_ConfigMap}]}=lib_conbee:device(?Type,Name),
-     maps:get(<<"reachable">>,StateMap).
+    not_implemented.
+   % {ok,[{_Name,_NumId,_ModelId,StateMap,_ConfigMap}]}=lib_conbee:device(?Type,Name),
+    % maps:get(<<"reachable">>,StateMap).
