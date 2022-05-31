@@ -1,4 +1,4 @@
-%%% -------------------------------------------------------------------
+%% -------------------------------------------------------------------
 %%% Author  : uabjle
 %%% Description :  
 %%% 
@@ -73,7 +73,7 @@ pressure(Name)->
 %% Description: Initiate the eunit tests, set upp needed processes etc
 %% Returns: non
 %% --------------------------------------------------------------------
-reachable(Name)->
+reachable(_Name)->
     not_implemented.
  %   {ok,[{_Name,_NumId,_ModelId,StateMap,_ConfigMap}]}=lib_conbee:device(?Type,Name),
   %   maps:get(<<"reachable">>,StateMap).
