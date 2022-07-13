@@ -9,7 +9,7 @@
 %%% Pod consits beams from all services, app and app and sup erl.
 %%% The setup of envs is
 %%% -------------------------------------------------------------------
--module(basic_eunit).   
+-module(landet).   
  
 -export([start/0]).
 %% --------------------------------------------------------------------
@@ -23,10 +23,18 @@
 %% Returns: List({HostId,Ip,SshPort,Uid,Pwd}
 %% --------------------------------------------------------------------
 start()->
-    ok=application:start(conbee),
-    pong=conbee:ping(),
-    ok=landet:start(),
- 
+
+    ok=test1(),
+
+    ok=test_lumi_sensor_motion_aq2(),
+  %  ok=test_tradfri_bulb_E14_ws_candleopal_470lm(),
+
+    ok=test_tradfri_control_outlet(),
+    ok=test_tradfri_motion(), 
+  %  ok=test_lumi_weather(),
+  %  ok=test_lumi_switch(),
+  %  ok=test2(),
+  % 
 
  %   init:stop(),
     ok.
@@ -39,13 +47,13 @@ start()->
 %% Returns: non
 %% -------------------------------------------------------------------
 test_lumi_sensor_motion_aq2()->
-    not_implemented=conbee_server:cmd_devices(lumi_sensor_motion_aq2,reachable,["aqara_1_motion_sensor"]),
-    Presence=conbee_server:cmd_devices(lumi_sensor_motion_aq2,is_presence,["aqara_1_motion_sensor"]),
-    Dark=conbee_server:cmd_devices(lumi_sensor_motion_aq2,is_dark,["aqara_1_motion_sensor"]),
-    DayLight=conbee_server:cmd_devices(lumi_sensor_motion_aq2,is_daylight,["aqara_1_motion_sensor"]),
-    LightLevel=conbee_server:cmd_devices(lumi_sensor_motion_aq2,lightlevel,["aqara_1_motion_sensor"]),
-    Lux=conbee_server:cmd_devices(lumi_sensor_motion_aq2,lux,["aqara_1_motion_sensor"]),
-    io:format("aqara_1_motion_sensor ~p~n",[{Presence,Dark,DayLight,LightLevel,Lux}]),
+    not_implemented=conbee:cmd_devices(lumi_sensor_motion_aq2,reachable,["landet_motion_xiomi_1"]),
+    Presence=conbee:cmd_devices(lumi_sensor_motion_aq2,is_presence,["landet_motion_xiomi_1"]),
+    Dark=conbee:cmd_devices(lumi_sensor_motion_aq2,is_dark,["landet_motion_xiomi_1"]),
+    DayLight=conbee:cmd_devices(lumi_sensor_motion_aq2,is_daylight,["landet_motion_xiomi_1"]),
+    LightLevel=conbee:cmd_devices(lumi_sensor_motion_aq2,lightlevel,["landet_motion_xiomi_1"]),
+    Lux=conbee:cmd_devices(lumi_sensor_motion_aq2,lux,["landet_motion_xiomi_1"]),
+    io:format("landet_motion_xiomi_1 ~p~n",[{Presence,Dark,DayLight,LightLevel,Lux}]),
     ok.
 
 %% --------------------------------------------------------------------
@@ -54,14 +62,14 @@ test_lumi_sensor_motion_aq2()->
 %% Returns: non
 %% -------------------------------------------------------------------
 test_tradfri_bulb_E14_ws_candleopal_470lm()->
-    conbee_server:cmd_devices(lumi_switch_n0agl1,set,["lumi_1_switch","on"]),
+    conbee:cmd_devices(lumi_switch_n0agl1,set,["lumi_1_switch","on"]),
     timer:sleep(1000),
-    conbee_server:cmd_devices(tradfri_bulb_E14_ws_candleopal_470lm,set,["tradfri_lamp_2_lights","off"]),
+    conbee:cmd_devices(tradfri_bulb_E14_ws_candleopal_470lm,set,["tradfri_lamp_2_lights","off"]),
     timer:sleep(1000),
-    true=conbee_server:cmd_devices(tradfri_bulb_E14_ws_candleopal_470lm,reachable,["tradfri_lamp_2_lights"]),
+    true=conbee:cmd_devices(tradfri_bulb_E14_ws_candleopal_470lm,reachable,["tradfri_lamp_2_lights"]),
 
-    conbee_server:cmd_devices(tradfri_bulb_E14_ws_candleopal_470lm, set_bri,["tradfri_lamp_2_lights",10]),
-    conbee_server:cmd_devices(tradfri_bulb_E14_ws_candleopal_470lm,set,["tradfri_lamp_2_lights","on"]),
+    conbee:cmd_devices(tradfri_bulb_E14_ws_candleopal_470lm, set_bri,["tradfri_lamp_2_lights",10]),
+    conbee:cmd_devices(tradfri_bulb_E14_ws_candleopal_470lm,set,["tradfri_lamp_2_lights","on"]),
     
 
     ok.
@@ -72,14 +80,14 @@ test_tradfri_bulb_E14_ws_candleopal_470lm()->
 %% Returns: non
 %% -------------------------------------------------------------------
 test_tradfri_control_outlet()->
-    true=conbee_server:cmd_devices(tradfri_control_outlet,reachable,["tradfri_outlet_2_switch"]),
-    conbee_server:cmd_devices(tradfri_control_outlet,set,["tradfri_outlet_2_switch","off"]),
+    true=conbee:cmd_devices(tradfri_control_outlet,reachable,["landet_outlet_1"]),
+    conbee:cmd_devices(tradfri_control_outlet,set,["landet_outlet_1","off"]),
     timer:sleep(1000),
-    false=conbee_server:cmd_devices(tradfri_control_outlet,is_on,["tradfri_outlet_2_switch"]),
-    conbee_server:cmd_devices(tradfri_control_outlet,set,["tradfri_outlet_2_switch","on"]),
-    true=conbee_server:cmd_devices(tradfri_control_outlet,is_on,["tradfri_outlet_2_switch"]),
-    conbee_server:cmd_devices(tradfri_control_outlet,set,["tradfri_outlet_2_switch","off"]),
-    false=conbee_server:cmd_devices(tradfri_control_outlet,is_on,["tradfri_outlet_2_switch"]),
+    false=conbee:cmd_devices(tradfri_control_outlet,is_on,["landet_outlet_1"]),
+    conbee:cmd_devices(tradfri_control_outlet,set,["landet_outlet_1","on"]),
+    true=conbee:cmd_devices(tradfri_control_outlet,is_on,["landet_outlet_1"]),
+    conbee:cmd_devices(tradfri_control_outlet,set,["landet_outlet_1","off"]),
+    false=conbee:cmd_devices(tradfri_control_outlet,is_on,["landet_outlet_1"]),
     ok.
     
 %% --------------------------------------------------------------------
@@ -88,9 +96,9 @@ test_tradfri_control_outlet()->
 %% Returns: non
 %% -------------------------------------------------------------------
 test_tradfri_motion()->
-    not_implemented=conbee_server:cmd_devices(tradfri_motion_sensor,reachable,["tradfri_motion_1_sensor"]),
-    Presence=conbee_server:cmd_devices(tradfri_motion_sensor,is_presence,["tradfri_motion_1_sensor"]),
-    io:format("tradfri_motion_1_sensor ~p~n",[Presence]),
+    not_implemented=conbee:cmd_devices(tradfri_motion_sensor,reachable,["landet_ikea_motion_sensor_1"]),
+    Presence=conbee:cmd_devices(tradfri_motion_sensor,is_presence,["landet_ikea_motion_sensor_1"]),
+    io:format("landet_ikea_motion_sensor_1 ~p~n",[Presence]),
     
     ok.
 
@@ -100,10 +108,10 @@ test_tradfri_motion()->
 %% Returns: non
 %% -------------------------------------------------------------------
 test_lumi_weather()->
-    not_implemented=conbee_server:cmd_devices(lumi_weather,reachable,["lumi_weather_1_sensor"]),
-    Temp=conbee_server:cmd_devices(lumi_weather,temp,["lumi_weather_1_sensor"]),
-    Humidity=conbee_server:cmd_devices(lumi_weather,humidity,["lumi_weather_1_sensor"]),
-    Pressure=conbee_server:cmd_devices(lumi_weather,pressure,["lumi_weather_1_sensor"]),
+    not_implemented=conbee:cmd_devices(lumi_weather,reachable,["lumi_weather_1_sensor"]),
+    Temp=conbee:cmd_devices(lumi_weather,temp,["lumi_weather_1_sensor"]),
+    Humidity=conbee:cmd_devices(lumi_weather,humidity,["lumi_weather_1_sensor"]),
+    Pressure=conbee:cmd_devices(lumi_weather,pressure,["lumi_weather_1_sensor"]),
     io:format("lumi_weather_1_sensor ~p~n",[{Temp,Humidity,Pressure}]),
     
     ok.
@@ -114,15 +122,15 @@ test_lumi_weather()->
 %% Returns: non
 %% -------------------------------------------------------------------
 test_lumi_switch()->
-    true=conbee_server:cmd_devices(lumi_switch_n0agl1,reachable,["lumi_1_switch"]),
-    conbee_server:cmd_devices(lumi_switch_n0agl1,set,["lumi_1_switch","off"]),
-    false=conbee_server:cmd_devices(lumi_switch_n0agl1,is_on,["lumi_1_switch"]),
-    conbee_server:cmd_devices(lumi_switch_n0agl1,set,["lumi_1_switch","on"]),
+    true=conbee:cmd_devices(lumi_switch_n0agl1,reachable,["lumi_1_switch"]),
+    conbee:cmd_devices(lumi_switch_n0agl1,set,["lumi_1_switch","off"]),
+    false=conbee:cmd_devices(lumi_switch_n0agl1,is_on,["lumi_1_switch"]),
+    conbee:cmd_devices(lumi_switch_n0agl1,set,["lumi_1_switch","on"]),
     timer:sleep(2000),
-    true=conbee_server:cmd_devices(lumi_switch_n0agl1,is_on,["lumi_1_switch"]),
-    conbee_server:cmd_devices(lumi_switch_n0agl1,set,["lumi_1_switch","off"]),
+    true=conbee:cmd_devices(lumi_switch_n0agl1,is_on,["lumi_1_switch"]),
+    conbee:cmd_devices(lumi_switch_n0agl1,set,["lumi_1_switch","off"]),
     timer:sleep(2000),
-    false=conbee_server:cmd_devices(lumi_switch_n0agl1,is_on,["lumi_1_switch"]),
+    false=conbee:cmd_devices(lumi_switch_n0agl1,is_on,["lumi_1_switch"]),
     ok.
     
  
@@ -132,9 +140,9 @@ test_lumi_switch()->
 %% Returns: non
 %% -------------------------------------------------------------------
 test2()->
-    true=conbee_server:cmd_devices(lumi_switch_n0agl1,reachable,["lumi_1_switch"]),
-    not_implemented=conbee_server:cmd_devices(lumi_weather,reachable,["lumi_weather_1_sensor"]),
-    not_implemented=conbee_server:cmd_devices(tradfri_motion_sensor,reachable,["tradfri_motion_1_sensor"]),
+    true=conbee:cmd_devices(lumi_switch_n0agl1,reachable,["lumi_1_switch"]),
+    not_implemented=conbee:cmd_devices(lumi_weather,reachable,["lumi_weather_1_sensor"]),
+    not_implemented=conbee:cmd_devices(tradfri_motion_sensor,reachable,["tradfri_motion_1_sensor"]),
     
  
     
@@ -157,7 +165,9 @@ test1()->
      "lumi_sensor_magnet_aq2",
      "lumi_sensor_motion_aq2",
      "lumi_weather",
-     "lumi_switch_n0agl1"]=conbee_server:all_devices(),
+     "lumi_switch_n0agl1"]=conbee:all_devices(),
+
+    io:format("conbee:all_devices() ~p~n",[conbee:all_devices()]),
     
     ok.
 %% --------------------------------------------------------------------

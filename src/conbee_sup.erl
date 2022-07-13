@@ -30,7 +30,7 @@ init([]) ->
                  intensity => 0,
                  period => 1},
     ChildSpecs = [#{id=>conbee,
-                    start=>{conbee_server,start,[]}}],
+                    start=>{conbee,start,[]}}],
     {ok, {SupFlags, ChildSpecs}}.
 
 %% internal functions

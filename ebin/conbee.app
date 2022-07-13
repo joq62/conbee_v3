@@ -5,7 +5,7 @@
               {mod,{conbee_app,[]}},
               {applications,[kernel,stdlib]},
               {env,[]},
-              {modules,[conbee_app,conbee_server,conbee_sup,devices_conbee,
+              {modules,[conbee,conbee_app,conbee_sup,devices_conbee,
                         lib_conbee,lights,lumi_sensor_magnet_aq2,
                         lumi_sensor_motion_aq2,lumi_switch_n0agl1,
                         lumi_weather,sensors,switch,

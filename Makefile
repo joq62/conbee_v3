@@ -6,7 +6,11 @@ all:
 	rebar3 compile;	
 	cp _build/default/lib/*/ebin/* ebin;
 	rm -rf _build;
-	echo Done
+	echo complile succeded and do git;
+	git add -f *;
+	git commit -m  $(m);
+	git push; 
+	echo OK there you go
 check:
 	rebar3 check
 

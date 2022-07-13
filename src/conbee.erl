@@ -7,7 +7,7 @@
 %%% 
 %%% Created : 
 %%% -------------------------------------------------------------------
--module(conbee_server). 
+-module(conbee).  
 
 -behaviour(gen_server). 
 
