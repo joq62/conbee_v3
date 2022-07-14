@@ -24,6 +24,8 @@
 
 %% External exports
 -export([
+	 turn_off/1,
+	 turn_on/3,
 	 is_on/1,
 	 set/2,
 	 get_bri/1,
@@ -38,7 +40,28 @@
 %% ====================================================================
 %% External functions
 %% ====================================================================
+%% --------------------------------------------------------------------
+%% Function:start/0 
+%% Description: Initiate the eunit tests, set upp needed processes etc
+%% Returns: non
+%% --------------------------------------------------------------------
+turn_on(Name,Brightness,ColorTemp)->
+    tradfri_bulb_E14_ws_candleopal_470lm:set(Name,"on"),
+    tradfri_bulb_E14_ws_candleopal_470lm:set_bri(Name,Brightness),
+    tradfri_bulb_E14_ws_candleopal_470lm:set_ct(Name,ColorTemp),
+    timer:sleep(4000),
+    ok.
 
+%% --------------------------------------------------------------------
+%% Function:start/0 
+%% Description: Initiate the eunit tests, set upp needed processes etc
+%% Returns: non
+%% --------------------------------------------------------------------
+turn_off(Name)->
+    tradfri_bulb_E14_ws_candleopal_470lm:set_bri(Name,0),
+    tradfri_bulb_E14_ws_candleopal_470lm:set(Name,"off"),
+    timer:sleep(4000),
+    ok.
 
 %% --------------------------------------------------------------------
 %% Function:start/0 
