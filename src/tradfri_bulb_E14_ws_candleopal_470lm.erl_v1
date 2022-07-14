@@ -28,8 +28,6 @@
 	 set/2,
 	 get_bri/1,
 	 set_bri/2,
-	 get_ct/1,
-	 set_ct/2,
 	 reachable/1
 	 
 	]). 
@@ -58,37 +56,6 @@ set(Name,State)->
 	     "off"->
 		 jsx:encode(#{<<"on">> => false})
 	 end,
-    {ok, ConnPid} = gun:open(ConbeeAddr,ConbeePort),
-    StreamRef = gun:put(ConnPid, Cmd, 
-			[{<<"content-type">>, "application/json"}],Body),
-    Result=lib_conbee:get_reply(ConnPid,StreamRef),
-    ok=gun:close(ConnPid),
-    Result.
-
-%% --------------------------------------------------------------------
-%% Function:start/0 
-%% Description: Initiate the eunit tests, set upp needed processes etc
-%% Returns: non
-%% --------------------------------------------------------------------
-get_ct(Name)->
-    {ok,[{_Name,_NumId,_ModelId,StateMap,_ConfigMap}]}=lib_conbee:device(?Type,Name),
-     maps:get(<<"ct">>,StateMap).
-
-
-%% --------------------------------------------------------------------
-%% Function:start/0 
-%% Description: Initiate the eunit tests, set upp needed processes etc
-%% Returns: non
-%% --------------------------------------------------------------------
-set_ct(Name,ColorTemp)->
-    {ok,[{_Name,NumId,_ModelId,_StateMap,_ConfigMap}]}=lib_conbee:device(?Type,Name),
-  
-    {ok,ConbeeAddr}=application:get_env(conbee,addr),
-    {ok,ConbeePort}=application:get_env(conbee,port),
-    {ok,Crypto}=application:get_env(conbee,key),
-
-    Cmd="/api/"++Crypto++"/"++?Type++"/"++NumId++"/state",
-    Body=jsx:encode(#{<<"ct">> => ColorTemp}),	      
     {ok, ConnPid} = gun:open(ConbeeAddr,ConbeePort),
     StreamRef = gun:put(ConnPid, Cmd, 
 			[{<<"content-type">>, "application/json"}],Body),
