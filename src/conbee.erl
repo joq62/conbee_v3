@@ -33,7 +33,8 @@
 
 	 info_lights/0,
 	 info_switch/0,
-	 
+
+	 appl_start/1,
 	 ping/0
 	]).
 
