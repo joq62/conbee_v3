@@ -39,7 +39,22 @@
 %% Description: Initiate the eunit tests, set upp needed processes etc
 %% Returns: non
 %% --------------------------------------------------------------------
-
+button_event(Name)->
+    {ok,[{_Name,_NumId,_ModelId,StateMap,_ConfigMap}]}=lib_conbee:device(?Type,Name),
+    case maps:get(<<"buttonevent">>,StateMap) of
+	1001->
+	    unknown_1;
+	1002->
+	    click_1;
+	1003->
+	    pushed_1;
+	2001 ->
+	    unknown_2;
+	2002 ->
+	    click_0;
+	2003 ->
+	    pushed_2
+    end.
 
 
 %% --------------------------------------------------------------------
